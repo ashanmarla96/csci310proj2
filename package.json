@@ -1,0 +1,34 @@
+{
+  "name": "csci310proj2",
+  "version": "1.0.0",
+  "description": "CSCI 310 Project 2",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashanmarla96/csci310proj2.git"
+  },
+  "author": "Arthur Shau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashanmarla96/csci310proj2/issues"
+  },
+  "homepage": "https://github.com/ashanmarla96/csci310proj2#readme",
+  "dependencies": {
+    "async": "^2.3.0",
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "lodash": "^4.17.4",
+    "php-express": "0.0.3",
+    "request": "^2.81.0",
+    "wordcloud": "^1.0.6"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "rocha": "^2.3.0"
+  }
+}
