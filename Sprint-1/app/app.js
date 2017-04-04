@@ -46,22 +46,20 @@ app.get('/wordcloud/:keyword', function(req,res) {
     }
     request.get( {
         url: 'http://dl.acm.org/results.cfm',
-        qs {
+        qs: {
             query: keyword,
-            Go.x: 0,
-            Go.y: 0
         }
     }, function (err, response, body) {
         if (err){
             return res.status(500).send('ERROR')
         }
-        var page = cheerio.load(body);
-        var urls = page('#results .details .title a').map(a => a.attr('href'));
+        var $ = cheerio.load(body);
+        var urls = $('#results .details .title').map((index, title) => $(title).text());
         if (urls[0] == null) {
-            res.render('wordcloud' {get: {result: 'Fail'}});
+            res.render('wordcloud', {get: {result: 'Fail'}});
         }
         else {
-            res.render('wordcloud' {get: {result: 'Success'}});
+            res.render('wordcloud', {get: {result: urls[0]}});
         }
 
     })

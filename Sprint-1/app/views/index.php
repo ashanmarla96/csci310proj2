@@ -3,8 +3,6 @@
   <head>
 	<style>
 	.search {
-		padding-left: 20px;
-		padding-right: 20px;
 		margin-top: 20px;
 		margin-bottom: 20px;
 	}
@@ -19,8 +17,8 @@
 	<center>
 	  <h1>Word Cloud</h1>
 	  <div class = "search">
-	  	<input name = "search_bar" type="text" id="search_input" class = "search" oninput="searchKeywordOrName()" > 
-	  	<button id = "search_button" type = "button">Search! </button>
+	  	<input id = "search_bar" type="text" id="search_input" class = "search"> 
+	  	<button id = "search_button" type = "button" onclick="window.location.href='/wordcloud/'+document.getElementById('search_bar').value">Search! </button>
 	  </div>
 
 	  <div class = "history">

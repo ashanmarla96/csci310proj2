@@ -4,6 +4,6 @@
 		<title>Example</title>
 	</head>
 	<body>
-		<?php $_GET['result']?>
+		<p> <?php echo $_GET['result']?> </p>
 	</body>
 </html>
