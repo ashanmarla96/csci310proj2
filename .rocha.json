@@ -1,0 +1,118 @@
+[
+  {
+    "title": "",
+    "tests": []
+  },
+  {
+    "title": "Searching for Author/Keyword",
+    "tests": []
+  },
+  {
+    "title": "Searching for Author/Keyword Good Input",
+    "tests": [
+      "Does not return 500 Artist Not Found",
+      "Does not return undefined response",
+      "Does not return 404 Page Not Found"
+    ]
+  },
+  {
+    "title": "Searching for Author/Keyword Bad Input",
+    "tests": [
+      "Returns 500 Internal Server Error/Input Not Found"
+    ]
+  },
+  {
+    "title": "Searching for Author/Keyword Null Input",
+    "tests": [
+      "Returns 404 Page Not Found"
+    ]
+  },
+  {
+    "title": "Abstract Page",
+    "tests": []
+  },
+  {
+    "title": "Abstract Page Good Input",
+    "tests": [
+      "Does not return undefined response",
+      "Does not return 404 Page Not Found",
+      "Does not return 500 Artist Not Found"
+    ]
+  },
+  {
+    "title": "Abstract Page PaperID Bad Input",
+    "tests": [
+      "Returns 500 Internal Server Error/Artist Not Found"
+    ]
+  },
+  {
+    "title": "Abstract Page Word Bad Input",
+    "tests": [
+      "Returns 500 Internal Server Error/Artist Not Found"
+    ]
+  },
+  {
+    "title": "Abstract Page Word and Paper ID are undefined",
+    "tests": [
+      "Returns 404 Page Not Found"
+    ]
+  },
+  {
+    "title": "Abstract Page Word is undefined",
+    "tests": [
+      "Returns 404 Page Not Found"
+    ]
+  },
+  {
+    "title": "Paper List",
+    "tests": []
+  },
+  {
+    "title": "Paper List List Generated from Word",
+    "tests": []
+  },
+  {
+    "title": "Paper List List Generated from Word Good Input",
+    "tests": [
+      "Does not return 404 Page Not Found",
+      "Does not return undefined response",
+      "Does not return 500 Artist Not Found"
+    ]
+  },
+  {
+    "title": "Paper List List Generated from Word Word Bad Input",
+    "tests": [
+      "Returns 500 Internal Server Error/Papers Not Found"
+    ]
+  },
+  {
+    "title": "Paper List List Generated from Conference",
+    "tests": []
+  },
+  {
+    "title": "Paper List List Generated from Conference Good Input",
+    "tests": [
+      "Does not return undefined response",
+      "Does not return 404 Page Not Found",
+      "Does not return 500 Artist Not Found"
+    ]
+  },
+  {
+    "title": "Paper List List Generated from Conference ConferenceID Bad Input",
+    "tests": [
+      "Returns 500 Internal Server Error/Papers Not Found"
+    ]
+  },
+  {
+    "title": "Paper List List Generated from Conference The conferenceID is undefined",
+    "tests": [
+      "Returns 404 Page Not Found"
+    ]
+  },
+  {
+    "title": "Paper List Undefined input",
+    "tests": [
+      "Returns 404 Page Not Found"
+    ]
+  }
+]
