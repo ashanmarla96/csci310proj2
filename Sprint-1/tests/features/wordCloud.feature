@@ -20,4 +20,4 @@ Scenario: Status bar
 Scenario: Down load world cloud Image
 Given I am on the word cloud page
 When I click down load image button
-Then I should get a download with the filename "image.png"
+Then I should get a download with the filename
