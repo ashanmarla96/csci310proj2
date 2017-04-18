@@ -1,0 +1,142 @@
+body {
+    background: #d4d7db;
+}
+h1{
+   font-size: 50px;
+   margin: auto;
+   width:50%;
+
+}
+
+
+.main {
+  margin: auto;
+  width:50%;
+  min-width: 600px;
+}
+
+#box {
+  pointer-events: none;
+  position: absolute;
+  box-shadow: 0 0 50px 50px rgba(255,255,255, 0.5);
+  border-radius: 50px;
+  cursor:pointer;
+  z-index: 9999;
+}
+
+
+
+#canvas-container {
+  overflow-x: auto;
+  overflow-y: visible;
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.canvas {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.canvas.hide {
+  display: none;
+}
+
+#searchBar {
+    border-color: #a407ff;
+    font-size: 20px;
+    color: black;
+    height: 40px;
+    width:85%;
+    border-width: 2px;
+    border-radius: 5px;
+
+}
+
+#searchButton {
+    font-size: 20px;
+    font-style: italic;
+    font-weight: bold;
+    background: #a407ff;
+    border-color:#a407ff;
+    border-radius:5px;
+    width: 100px;
+    height: 41px;
+
+}
+#artist,ul{
+  list-style-type: none;
+  display: none;
+
+}
+
+/*wordcloud css*/
+#mergeButton{
+
+  font-size: 20px;
+  font-style: italic;
+  margin-top: 10px;
+  background: #b55cdb;
+  border-color: #b55cdb;
+  width: 140px;
+  height: 40px;
+}
+#searchBar2 {
+    border-color: purple;
+    font-size: 25px;
+    color: black;
+    height: 40px;
+    width: 400px;
+    border-width: 2px;
+}
+
+
+#wordcloudImage{
+   margin-left: 200px;
+
+}
+
+#searchButton2 {
+    font-size: 20px;
+    font-style: italic;
+    margin-top: 10px;
+    background: #b55cdb;
+    border-color: #b55cdb;
+    width: 100px;
+    height: 40px;
+}
+
+.cloudSearchArea{
+
+  margin-left: 200px;
+}
+#buttonArea {
+ margin-left: 100px;
+}
+
+#theWord{
+  width: 200px;
+  font-size: 40px;
+  margin: 0 0 0 500px;
+  text-align: center;
+}
+
+#songList{
+  text-align: center;
+  width: 200px;
+  font-size: 30px;
+  margin-left: 500px;
+  margin-top: 50px;
+
+}
+
+#backtoCloud{
+  margin-left: 500px;
+  background-color: purple;
+  color: white;
+  width: 300px;
+  height: 50px;
+  font-size: 40px;
+}
