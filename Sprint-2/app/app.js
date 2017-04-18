@@ -150,8 +150,9 @@ app.get('/paperlist/:word', (req,res) => {
         }
         var $ = cheerio.load(body);
         var titles = $('#results .details .title a').map((index, a) => $(a).attr('href'));
-        titles = 
-        res.render('paperlist', {get: {titles: titles}})
+        titles = titles.slice(0,10).join();
+        res.render('paperlist', {get: {titles: titles}});
+
     });
 });
 
