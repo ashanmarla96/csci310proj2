@@ -1,4 +1,4 @@
-window.onload = function() {
+document.addEventListener('DOMContentLoaded', function() {
 	WordCloud(document.getElementById("canvas"), {
 		list: window.list,
 		gridSize: Math.round(16 * 2000/1024),
@@ -31,4 +31,4 @@ window.onload = function() {
 			window.location.href='/paperlist/'+item[0]+'/'+list;
 		}
 	});
-};
+});

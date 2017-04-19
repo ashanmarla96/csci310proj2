@@ -78,12 +78,13 @@ app.get('/wordcloud/:keyword', (req,res) => {
             return res.status(500).send('ERROR')
         }
         var $ = cheerio.load(body);
-        var urls = $('#results .details .ft a').map((index, a) => $(a).attr('href'));
-        urls = urls.slice(0,10);
+        var urls = $('#results .details .ft a').map((index, a) => $(a).attr('href').trim());
+        urls = urls.slice(0,1);
         
         async.map(urls, (url, iAmDone) => {
             var freqMap = new Map();
-            var pdf = 'http://dl.acm.org/' + url;
+            //var pdf = 'http://dl.acm.org/' + url;
+            var pdf = 'http://www.pdf995.com/samples/pdf.pdf'
             var stream = text(pdf);
             var string = '';
             stream.on('data', (part) => {
@@ -132,26 +133,28 @@ app.get('/wordcloud/:keyword', (req,res) => {
                 result = result.slice(0,250);
             }
             result = result.join()
-            console.log(result[0]);
             res.render('wordcloud', {get: {keyword: keyword, list: result}});
 
         });
     });
 });
 
-app.get('/paperlist/:word', (req,res) => {
+app.get('/paperlist/:word/:keyword', (req,res) => {
     var word = req.params.word;
+    var keyword = req.params.keyword
     request.get( {
         url: 'http://dl.acm.org/results.cfm',
-        query: word
+        qs: {
+            query: word
+        }
     }, (err, response, body) => {
         if (err) {
             res.status(500).send('ERROR');
         }
         var $ = cheerio.load(body);
-        var titles = $('#results .details .title a').map((index, a) => $(a).attr('href'));
-        titles = titles.slice(0,10).join();
-        res.render('paperlist', {get: {titles: titles}});
+        var titles = $('#results .details .title').map((index, title) => $(title).text().trim());
+        var titleString = Array.prototype.join.call(titles.slice(0,5));
+        res.render('paperlist', {get: {titles: titleString, word: word, keyword: keyword}});
 
     });
 });
