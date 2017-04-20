@@ -5,6 +5,7 @@ var bodyParser = require('body-parser')
 var cheerio = require('cheerio')
 var text = require('pdf-stream').text;
 global.XMLHttpRequest = require('xhr2');
+global.DOMParser = require('xmldom').DOMParser
 
 var express = require('express'),
     http = require('http'),
@@ -78,13 +79,15 @@ app.get('/wordcloud/:keyword', (req,res) => {
             return res.status(500).send('ERROR')
         }
         var $ = cheerio.load(body);
-        var urls = $('#results .details .ft a').map((index, a) => $(a).attr('href').trim());
-        urls = urls.slice(0,1);
+        //var urls = $('#results .details .ft a').map((index, a) => $(a).attr('href').trim());
+        //urls = urls.slice(0,3);
+        var urls = ['http://www.pdf995.com/samples/pdf.pdf', 'http://che.org.il/wp-content/uploads/2016/12/pdf-sample.pdf']
         
         async.map(urls, (url, iAmDone) => {
             var freqMap = new Map();
             //var pdf = 'http://dl.acm.org/' + url;
-            var pdf = 'http://www.pdf995.com/samples/pdf.pdf'
+            console.log("hmmm");
+            var pdf = url;
             var stream = text(pdf);
             var string = '';
             stream.on('data', (part) => {

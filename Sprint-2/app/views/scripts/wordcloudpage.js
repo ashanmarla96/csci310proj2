@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		fontFamily: 'Finger Paint, cursive, sans-serif',
 		color: "random-light",
 		rotateRatio: 0,
-		hover: window.drawBox,
 		backgroundColor: "#001f00",
 		hover: function(item, dimension) {
 			if (!dimension) {
@@ -21,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			document.getElementById('box').style.top = dimension.y/2 + 'px';
 			document.getElementById('box').style.width = dimension.w/2 + 'px';
 			document.getElementById('box').style.height = dimension.h/2 + 'px';
-			console.log(document.getElementById('box').style)
 		},
 		click: function(item) {
 			var list=document.getElementsByTagName('h1')[0]

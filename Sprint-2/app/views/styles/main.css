@@ -1,10 +1,13 @@
 body {
     background: #d4d7db;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 h1{
    font-size: 50px;
    margin: auto;
    width:50%;
+   text-align: center;
 
 }
 
@@ -90,12 +93,14 @@ h1{
     height: 40px;
     width: 400px;
     border-width: 2px;
+    vertical-align: bottom;
 }
 
 
 #wordcloudImage{
-   margin-left: 200px;
-
+  width: 1170px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 #searchButton2 {
@@ -109,9 +114,11 @@ h1{
 }
 
 .cloudSearchArea{
-
-  margin-left: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
+
 #buttonArea {
  margin-left: 100px;
 }
