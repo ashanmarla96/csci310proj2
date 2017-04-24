@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Academic Papers</title>
+    <link href="/styles.css" / rel="stylesheet">
+</head>
+
+<body>
+    <div id="wordpage">
+        <h1 id="theWord"><?php echo $_GET['word'] ?></h1>
+        <ol id="paperList">
+            <li> Asdf <button>PDF</button> <button>Bibtext</button></li>
+            <li> Asdf <button>PDF</button></li>
+            <li> Asdf <button>PDF</button></li>
+            <li> Asdf <button>PDF</button></li>
+
+        </ol>
+
+        <button id="backtoCloud" onclick="window.location.href='/wordcloud/<?php echo $_GET['keyword'] ?>'"">Back to Cloud</button>
+</body>
+</html>
