@@ -15,7 +15,7 @@
           $paperArray = explode(",", $_GET['titles']);
           for ($x = 0; $x<count($paperArray); $x++) {
           ?>
-            <li> <?php echo $paperArray[$x]?> <button> PDF </button> <button> BibTex </button> </li>
+            <li> <?php echo $paperArray[$x]?> <br> <button> PDF </button> <button> BibTex </button> </li>
           <?php  
           }
           ?>

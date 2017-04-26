@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title>Word Cloud</title>
-    <link href="/styles.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="/styles.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src=/wordcloud2.js> </script>
     <script src=/wordcloudpage.js> </script>
