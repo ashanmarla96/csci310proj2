@@ -8,11 +8,27 @@
 </head>
 
 <body>
-	<h1> <?php echo $_GET['Title']; ?> </h1>
+	<h1 id = "Title"><?php echo $_GET['title'] ?></h1>
+	<h2> 
+	<?php
+		$authorArray = explode(",", $_GET['authors']);
+		for ($x = 0; $x<count($authorArray); $x++) {
+		?>
+			<a href="<?php echo "/wordcloud/".$authorArray[$x]."/"; ?>"><?php echo $authorArray[$x];?></a>
+			<?php
+			if ($x != count($authorArray) - 1) {
+				echo ', ';
+			}
+			?>
+		<?php
+		}
+	?>
+	</h2>
 	<div id="container4">
 		<p> <?php echo $_GET['abstract'];?> </p>
 	</div>
 
-<button id="backtoList" onclick="window.location.href='/wordsearch/<?php echo $_GET['word']."/".$_GET['artist'] ?>'"">Back to List</button>  
-<button id="backtoCloud" onclick="window.location.href='/wordcloud/<?php echo $_GET['artist'] ?>'"">Back to Cloud</button>
+<button id="backtoList" onclick="window.location.href='/paperlist/<?php echo $_GET['word']."/".$_GET['keyword'] ?>'"">Back to List</button>  
+<button id="backtoCloud" onclick="window.location.href='/wordcloud/<?php echo $_GET['keyword'] ?>'"">Back to Cloud</button>
+<button id="pdf">PDF</button>
 </body>

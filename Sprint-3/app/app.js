@@ -4,6 +4,7 @@ var _ = require('lodash')
 var bodyParser = require('body-parser')
 var cheerio = require('cheerio')
 var text = require('pdf-stream').text;
+var Horseman = require('node-horseman');
 global.XMLHttpRequest = require('xhr2');
 global.DOMParser = require('xmldom').DOMParser
 
@@ -24,6 +25,17 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));  // body parser is required!!
 
+var stopWords= ['a','about','am','an','and','any','are','arent',
+            'as','at','be','been','both','but','by','cant','cannot','could','couldnt',
+            'did','didnt','do','does','doesnt','doing','dont','each','few','for','from',
+            'had','hadnt','has','hasnt','havent','having','hed','hes','here','heres','hers',
+            'herself','himself','how','hows','i','id','ill','im','ive','if','in','is','isnt',
+            'it','its','itself','lets','more','most','mustnt','my','myself','nor','of','on',
+            'or','ought','shant','shed','shouldnt','so','some','such','than','that','thats',
+            'their','theirs','them','themselves','then','there','theres','these','theyd',
+            'theyll','theyre','theyve','this','through','to','too','up','was','wasnt','wed',
+            'well','weve','werent','what','whats','whens','wheres','which','while','who',
+            'whos','whom','whys','with','yourself','yourselves']
 
 // set view engine to php-express
 app.set('views', path.join(__dirname, 'views'));
@@ -70,7 +82,7 @@ app.get('/wordcloud/', function(req,res) {
 
 app.get('/wordcloud/:keyword', (req,res) => {
     var keyword = req.params.keyword;
-    if (keyword.length > 10) {
+    if (keyword.length > 50) {
         res.status(500).send('500 Bad Input/Keyword not found')
     }
     request.get( {
@@ -100,11 +112,13 @@ app.get('/wordcloud/:keyword', (req,res) => {
                 for (var i = 0; i < wordArray.length; i++) {
                     if (wordArray[i] !== "") {
                         var word = wordArray[i].toLowerCase().replace(/'/g, "");
-                        if (freqMap.has(word)) {
-                            freqMap.set(word, freqMap.get(word)+1);
-                        } 
-                        else {
-                            freqMap.set(word, 1);
+                        if (word.length != 1 && stopWords.indexOf(word) < 0) {
+                            if (freqMap.has(word)) {
+                                freqMap.set(word, freqMap.get(word)+1);
+                            } 
+                            else {
+                                freqMap.set(word, 1);
+                            }
                         }
                     }
                 }
@@ -158,9 +172,11 @@ app.get('/paperlist/:word/:keyword', (req,res) => {
         var $ = cheerio.load(body);
         var titles = $('#results .details .title').map((index, title) => $(title).text().trim());
         var urls = $('#results .details .title a').map((index, a) => $(a).attr('href'));
+        var pdflinks = $('#results > .details > .ft > a').map((index, a) => $(a).attr('href'));
         var titleString = Array.prototype.join.call(titles.slice(0,5));
         var urlString = Array.prototype.join.call(urls.slice(0,5));
-        res.render('paperlist', {get: {titles: titleString, urls: urlString, word: word, keyword: keyword}});
+        var pdfString = Array.prototype.join.call(pdflinks.slice(0,5));
+        res.render('paperlist', {get: {titles: titleString, urls: urlString, word: word, keyword: keyword, pdfs: pdfString}});
 
     });
 });
@@ -168,8 +184,39 @@ app.get('/paperlist/:word/:keyword', (req,res) => {
 app.get('/abstractpage/:word/:keyword/:url', (req, res) => {
     var word = req.params.word;
     var keyword = req.params.keyword;
-    var url = req.params.url;
-});
+    var url = decodeURIComponent(req.params.url);
+
+    request.get( {
+        url: 'http://dl.acm.org/' + url
+    }, (err, response, body) => {
+        if (err) {
+            res.status(500).send('ERROR');
+        }
+        var $ = cheerio.load(body);
+        var title = $('#divmain > div > h1 > strong').text().trim();
+        var authors = $('#divmain > table:nth-child(2) > tr > td:nth-child(1) > table:nth-child(2) > tr > td:nth-child(2) > a')
+            .map((index, a) => $(a).text().trim());
+        var authorString = Array.prototype.join.call(authors.slice(0,5));
+        var horseman = new Horseman({timeout: 10000});
+        horseman
+            .userAgent('Mozilla/5.0 (Windows NT 6.1; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0')
+            .open('http://dl.acm.org/citation.cfm?id=1101935&CFID=929144694&CFTOKEN=87293293')
+            .waitForSelector('#abstract > div > div')
+            .text('#abstract > div > div')
+            .then((abstract) => {
+
+                const match = new RegExp(sanitize(word), 'ig');
+                abstract = abstract.replace(match,  '<span style="background-color:yellow">$&</span>');
+                console.log(abstract);
+                res.render('abstractpage', {get: {word: word, keyword: keyword, abstract: abstract, title: title, authors: authorString}})
+            })
+            .close();
+        });
+    })
+
+function sanitize(val) {
+  return val.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

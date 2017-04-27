@@ -4,9 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Word Cloud</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="/styles.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src=/wordcloud2.js> </script>
     <script src=/wordcloudpage.js> </script>
     <script>window.list = [<?php $array = explode(",", $_GET['list']); echo "['".$array[0]."',9],"; for ($x = 1; $x < count($array)/4; $x++){ echo "['".$array[$x]."',5],";} for ($x = count($array)/4; $x < count($array)/2; $x++){ echo "['".$array[$x]."',4],";} for ($x = count($array)/2; $x < 3*count($array)/2; $x++){ echo "['".$array[$x]."',3],";} for ($x = 3*count($array)/2; $x < count($array); $x++){ echo "['".$array[$x]."',2],";} ?>] </script>

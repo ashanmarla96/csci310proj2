@@ -10,13 +10,13 @@ div, p {
 }
 
 #container4 {
-	margin: auto;
-	padding: 20px  0;
-	text-align: left;
-	width: 390px;
+    margin: auto;
+    padding: 0px 0px 20px 0px;
+    text-align: center;
+    width: 800px;
 }
 
-#backtoList, #backtoCloud{
+#backtoList, #backtoCloud, #pdf{
   margin-left: 0px;
   background-color: purple;
   color: white;
