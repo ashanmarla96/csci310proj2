@@ -56,13 +56,17 @@ app.get('/wordcloudpage.js', (req, res) => {
 
 ////////////////////////////////
 
+app.get('/test', function(req, res) {
+    res.render('test');
+});
+
 app.get('/', function(req,res) {
     res.render('index')
-})
+});
 
 app.get('/wordcloud/', function(req,res) {
     res.status(404).send('404 Page Not Found'); 
-})
+});
 
 app.get('/wordcloud/:keyword', (req,res) => {
     var keyword = req.params.keyword;
@@ -165,10 +169,7 @@ app.get('/abstractpage/:word/:keyword/:url', (req, res) => {
     var word = req.params.word;
     var keyword = req.params.keyword;
     var url = req.params.url;
-    request.get( {
-        url: 'http://dl'
-    })
-})
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
