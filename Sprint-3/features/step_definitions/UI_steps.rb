@@ -24,7 +24,7 @@ Then /I should see the word cloud/ do
 end
 
 Then /the word cloud title should be the same as html title/ do
-	expect(current_url).to include("###")
+	expect(current_url).to include("halfond")
 end
 
 
