@@ -13,9 +13,10 @@
         <ol id="paperList">
         <?php
           $paperArray = explode(",", $_GET['titles']);
+          $urlArray = explode(",", $_GET['urls']);
           for ($x = 0; $x<count($paperArray); $x++) {
           ?>
-            <li> <?php echo $paperArray[$x]?> <br> <button> PDF </button> <button> BibTex </button> </li>
+            <li> <a href="<?php echo "/abstractpage/".$_GET['word']."/".$GET_['keyword']."/".$urlArray[$x]; ?>"> <?php echo $paperArray[$x]?> <br> <button> PDF </button> <button> BibTex </button> </li>
           <?php  
           }
           ?>

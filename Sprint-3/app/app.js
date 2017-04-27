@@ -141,7 +141,7 @@ app.get('/wordcloud/:keyword', (req,res) => {
 
 app.get('/paperlist/:word/:keyword', (req,res) => {
     var word = req.params.word;
-    var keyword = req.params.keyword
+    var keyword = req.params.keyword;
     request.get( {
         url: 'http://dl.acm.org/results.cfm',
         qs: {
@@ -153,11 +153,22 @@ app.get('/paperlist/:word/:keyword', (req,res) => {
         }
         var $ = cheerio.load(body);
         var titles = $('#results .details .title').map((index, title) => $(title).text().trim());
+        var urls = $('#results .details .title a').map((index, a) => $(a).attr('href'));
         var titleString = Array.prototype.join.call(titles.slice(0,5));
-        res.render('paperlist', {get: {titles: titleString, word: word, keyword: keyword}});
+        var urlString = Array.prototype.join.call(urls.slice(0,5));
+        res.render('paperlist', {get: {titles: titleString, urls: urlString, word: word, keyword: keyword}});
 
     });
 });
+
+app.get('/abstractpage/:word/:keyword/:url', (req, res) => {
+    var word = req.params.word;
+    var keyword = req.params.keyword;
+    var url = req.params.url;
+    request.get( {
+        url: 'http://dl'
+    })
+})
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
