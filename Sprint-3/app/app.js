@@ -207,7 +207,6 @@ app.get('/abstractpage/:word/:keyword/:url', (req, res) => {
 
                 const match = new RegExp(sanitize(word), 'ig');
                 abstract = abstract.replace(match,  '<span style="background-color:yellow">$&</span>');
-                console.log(abstract);
                 res.render('abstractpage', {get: {word: word, keyword: keyword, abstract: abstract, title: title, authors: authorString}})
             })
             .close();

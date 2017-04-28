@@ -59,7 +59,7 @@
             window.location.href = '/wordcloud/'+elem;
         }
 
-        const EASE = 100;
+        const EASE = 50;
         var currValue = 0;
         function makeProgress(){
             currValue += (100 - currValue) / EASE;
