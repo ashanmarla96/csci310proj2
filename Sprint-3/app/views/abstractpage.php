@@ -30,5 +30,5 @@
 
 <button id="backtoList" onclick="window.location.href='/paperlist/<?php echo $_GET['word']."/".$_GET['keyword'] ?>'"">Back to List</button>  
 <button id="backtoCloud" onclick="window.location.href='/wordcloud/<?php echo $_GET['keyword'] ?>'"">Back to Cloud</button>
-<button id="pdf">PDF</button>
+<button id="pdf" onclick="window.location.href='/pdf/<?php echo $_GET['word'] ?>'"">PDF</button>
 </body>
