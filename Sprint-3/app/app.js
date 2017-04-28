@@ -5,6 +5,7 @@ var bodyParser = require('body-parser')
 var cheerio = require('cheerio')
 var text = require('pdf-stream').text;
 var Horseman = require('node-horseman');
+var PDFDocument = require('pdfkit')
 global.XMLHttpRequest = require('xhr2');
 global.DOMParser = require('xmldom').DOMParser
 
@@ -16,7 +17,6 @@ var express = require('express'),
     phpExpress = require('php-express')({
         binPath: '/usr/bin/php' // php bin path.
     });
-
 
 // init express
 var app = express();
@@ -71,6 +71,34 @@ app.get('/wordcloudpage.js', (req, res) => {
 app.get('/test', function(req, res) {
     res.render('test');
 });
+
+app.get('/pdf/:word', (req, res) => {
+    const doc = new PDFDocument()
+    // Stripping special characters
+    // Setting response to 'attachment' (download).
+    // If you use 'inline' here it will automatically open the PDF
+    res.setHeader('Content-disposition', 'attachment; filename="Paper List"')
+    res.setHeader('Content-type', 'application/pdf')
+    word = req.params.word;
+    request.get({
+        url: 'http://dl.acm.org/results.cfm',
+        qs: {
+            query: word,
+        }
+    }, (err, response, body) => {
+        if (err) {
+            return res.status(500).send('ERROR')
+        }
+        var $ = cheerio.load(body);
+        var titles = $('#results .details .title').map((index, title) => $(title).text().trim());
+        titles = titles.slice(0,5);
+        for (var i = 0; i < titles.length; i++) {
+            doc.text(i+1 + ". " + titles[i]);
+        }
+        doc.pipe(res)
+        doc.end()
+    })
+})
 
 app.get('/', function(req,res) {
     res.render('index')

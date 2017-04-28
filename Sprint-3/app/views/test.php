@@ -5,14 +5,11 @@
 	<meta charset="utf-8">
 	<title> Abstract </title>
 	<link href= "/abstract.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 </head>
 
 <body>
-	<h1> <?php echo $_GET['song']; ?> </h1>
-	<div id="container4">
-		<p> Hey there! This is a test text. FUck shit asdlfjasdfasd asdf asdfasdf asdlfjasdf asdf wefase  </p>
-	</div>
 
-<button id="backtoList" onclick="window.location.href='/wordsearch/<?php echo $_GET['word']."/".$_GET['artist'] ?>'"">Back to List</button>  
-<button id="backtoCloud" onclick="window.location.href='/wordcloud/<?php echo $_GET['artist'] ?>'"">Back to Cloud</button>
-</body>
+
+<button id="submit-btn" onclick="window.location.href='/pdf/the'">Traditional Submit</button>

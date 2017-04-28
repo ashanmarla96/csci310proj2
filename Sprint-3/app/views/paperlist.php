@@ -25,7 +25,7 @@
         </ol>
 
         <button id="backtoCloud" onclick="window.location.href='/wordcloud/<?php echo $_GET['keyword'] ?>'">Back to Cloud</button>
-        <button id="pdfButton">PDF</button>
+        <button id="pdfButton" onclick="window.location.href='/pdf/<?php echo $_GET['word']?>' " >PDF</button>
         <button id="txtButton">Text</button>
   </div>
 </body>
