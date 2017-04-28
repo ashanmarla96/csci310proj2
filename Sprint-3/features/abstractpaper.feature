@@ -1,4 +1,4 @@
-Feature: Abstract paper
+Feature: Abstract Paper Page
 	In order to inspect the word usage of a paper in detail
 	As a user
 	I need to see the abstract of any paper of my choice
@@ -29,7 +29,7 @@ Scenario: Select author for new searched
 	When I click an author
 	Then I should be on the word cloud page
 
-	Scenario: Select conference name
-	  Given I am on the abstract page
-		When I click the conference name
-		Then I should be on the conference page
+Scenario: Select conference name
+	Given I am on the abstract page
+	When I click the conference name
+	Then I should be on the conference page

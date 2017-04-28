@@ -1,4 +1,4 @@
-Feature: Paper List
+Feature: Paper List Page
 	In order to inspect the paper that contain a chosen word
 	As a user
 	I need to be able to see and interact with the page list

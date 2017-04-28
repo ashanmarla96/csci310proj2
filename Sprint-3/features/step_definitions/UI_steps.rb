@@ -33,15 +33,11 @@ Then /the word cloud title should be the same as html title/ do
 	expect(current_url).to include("halfond")
 end
 
-
-
-#papager list page, paper list title
-Then /keyword should be in the html/ do
-   expect(current_url).to have_content("halfond")
+Then /I should see the keyword as title/ do
+	expect(page).to have_content("halfond")
 end
-Then /word should be in the html/ do
-   expect(current_url).to have_content("the")
-end
+
+#PaperList Page
 
 Then /I should see the word as title/ do
 	 expect(page).to have_content("the")
@@ -55,23 +51,9 @@ Then /the paper list title should be the same as html title/ do
 	expect(current_url).to include("the/halfond")
 end
 
-Then /I should see the PDF button/ do
-	expect(page).to have_content("PDF")
-end
-Then /I should see the PDF button/ do
-	expect(page).to have_content("BibText")
-end
-Then /I should see the backtoCloud button/ do
-	expect(page).to  have_xpath("//input[@id='backtoCloud']")
-end
-Then /I should see the backtoCloud button/ do
-	expect(page).to  have_xpath("//input[@id='pdfButton']")
-end
-Then /I should see the backtoCloud button/ do
-	expect(page).to  have_xpath("//input[@id='Text']")
-end
 
-# paper page
+
+# Abstract page
 Then /I should see the paper title/ do
 	expect(page).to have_content("I'm Walking")
 end
@@ -84,11 +66,9 @@ end
 Then /the paper title should be the same as html title/ do
 	expect(current_url).to include("http://localhost:3000/abstractpage/the/halfond/citation.cfm%3Fid%3D1186074%26CFID%3D929560790%26CFTOKEN%3D11722653")
 end
-
-# conference page
-#Then /I should see the paper list/ do 
-	#expect(page).to have_xpath("//ol[@id='paper list']")
-#end
+Then /I should see the word hilighted/ do
+	pending # I should see the word with yellow hilighted color
+end
 
 
 # buttons and navigate back and click button

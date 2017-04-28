@@ -14,11 +14,11 @@ Then /I should see the paper contents/ do
 end
 
 Then /I should see the searched word/ do
-	expect(page).to have_content("selected word")
+	expect(page).to have_content("the")
 end
 
 When /I click an author/ do
-	page.click_link("click author name")
+	page.click_link("halfond")
 end
 
 When /I click the conference name/ do

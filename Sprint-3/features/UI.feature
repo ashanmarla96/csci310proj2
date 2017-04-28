@@ -15,14 +15,12 @@ Scenario: Word Cloud Page UI
 	And the word cloud title should be the same as html title
 	And I should see the searchBar2
 	And I should see the searchButton2
-
-	
+	And I should see the keyword as title
+	And I should see the downloadwordCloud Button
 
 Scenario: Paper List Page UI
 	Given I am on the page list page
-	Then keyword should be in the html
-	Then word should be in the html
-	And I should see the word as title
+	Then I should see the word as title
 	And I should see the paper list
 	And the page list title should be the same as html title
 	And I should see the PDF button
@@ -30,6 +28,7 @@ Scenario: Paper List Page UI
 	And I should see the pdfButton button
 	And I should see the Text button
 	And I should see the backtoCloud button
+	And I should see the subsetRadio button
 
 Scenario: Abstract Page UI
 	Given I am on the abstract page
@@ -37,8 +36,11 @@ Scenario: Abstract Page UI
 	And I should see the conference name
 	And I should see the author list
 	And the paper title should be the same as html title
-	And I should see the down load PDF button
+	And I should see the pdf button
+	And I should see the backtoList button
+	And I should see the backtoCloud button
+	And I should see the word hilighted
 
-	Scenario: Conference Page UI
+Scenario: Conference Page UI
 	Given I am on the conference page
 	Then I should see the paper list

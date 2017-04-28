@@ -5,7 +5,7 @@ Feature: Search Button
 
 Scenario: Normal Search
 	Given I am on the search page
-	When I fill the searchBar with author
+	When I fill the searchBar with halfond
 	And I click Search button
 	Then I should be on the word cloud page
 
