@@ -103,7 +103,7 @@ h1{
   margin-left: auto;
 }
 
-#searchButton2 {
+#searchButton2 , #saveImage{
     font-size: 20px;
     font-style: italic;
     margin-top: 10px;

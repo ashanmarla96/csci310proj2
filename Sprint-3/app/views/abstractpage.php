@@ -14,7 +14,7 @@
 		$authorArray = explode(",", $_GET['authors']);
 		for ($x = 0; $x<count($authorArray); $x++) {
 		?>
-			<a href="<?php echo "/wordcloud/".$authorArray[$x]."/"; ?>"><?php echo $authorArray[$x];?></a>
+			<a href="<?php echo "/wordcloud/".urlencode($authorArray[$x])."/"; ?>"><?php echo $authorArray[$x];?></a>
 			<?php
 			if ($x != count($authorArray) - 1) {
 				echo ', ';
@@ -30,5 +30,12 @@
 
 <button id="backtoList" onclick="window.location.href='/paperlist/<?php echo $_GET['word']."/".$_GET['keyword'] ?>'"">Back to List</button>  
 <button id="backtoCloud" onclick="window.location.href='/wordcloud/<?php echo $_GET['keyword'] ?>'"">Back to Cloud</button>
-<button id="pdf" onclick="window.location.href='/pdf/<?php echo $_GET['word'] ?>'"">PDF</button>
+<button id="pdf" onclick="window.location.href='/pdf/<?php echo $_GET['word']."/".urlencode($_GET['pdfurl']) ?>'"">PDF</button>
+<button id="bibtex" onclick= bibtex()>BibTex</button>
+
+<script>
+	function bibtex(event) {
+		alert(<?php echo json_encode($_GET['bibtex'])?>);
+	}
+</script>
 </body>

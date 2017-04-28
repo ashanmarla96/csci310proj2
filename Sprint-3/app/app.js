@@ -96,7 +96,7 @@ app.get('/wordcloud/:keyword', (req,res) => {
         }
         var $ = cheerio.load(body);
         var urls = $('#results .details .ft a').map((index, a) => $(a).attr('href').trim());
-        urls = urls.slice(0,3);
+        urls = urls.slice(0,2);
         
         async.map(urls, (url, iAmDone) => {
             var freqMap = new Map();
@@ -186,7 +186,7 @@ app.get('/abstractpage/:word/:keyword/:url', (req, res) => {
     var keyword = req.params.keyword;
     var url = decodeURIComponent(req.params.url);
 
-    request.get( {
+    request.get({
         url: 'http://dl.acm.org/' + url
     }, (err, response, body) => {
         if (err) {
@@ -197,21 +197,28 @@ app.get('/abstractpage/:word/:keyword/:url', (req, res) => {
         var authors = $('#divmain > table:nth-child(2) > tr > td:nth-child(1) > table:nth-child(2) > tr > td:nth-child(2) > a')
             .map((index, a) => $(a).text().trim());
         var authorString = Array.prototype.join.call(authors.slice(0,5));
+        var pdfurl = $('#divmain > table > tr > td:nth-child(1) > table:nth-child(1) > tr > td:nth-child(2) > a').attr('href');
         var horseman = new Horseman({timeout: 10000});
         horseman
             .userAgent('Mozilla/5.0 (Windows NT 6.1; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0')
-            .open('http://dl.acm.org/citation.cfm?id=1101935&CFID=929144694&CFTOKEN=87293293')
-            .waitForSelector('#abstract > div > div')
-            .text('#abstract > div > div')
-            .then((abstract) => {
-
+            .open('http://dl.acm.org/' + url)
+            .click('#divtools > ul > li:nth-child(4) > span > ul > li:nth-child(1) > a')
+            .waitForSelector('#theformats_body > pre')
+            .evaluate(function(selector1, selector2) {
+                return {
+                    abstract: $(selector1).text(),
+                    bibtex: $(selector2).text()
+                }
+            }, '#abstract > div > div', '#theformats_body > pre')
+            .then((result) => {
                 const match = new RegExp(sanitize(word), 'ig');
-                abstract = abstract.replace(match,  '<span style="background-color:yellow">$&</span>');
-                res.render('abstractpage', {get: {word: word, keyword: keyword, abstract: abstract, title: title, authors: authorString}})
+                abstract = result.abstract.replace(match,  '<span style="background-color:yellow">$&</span>');
+                res.render('abstractpage', {get: {word: word, keyword: keyword, abstract: abstract, title: title, 
+                    authors: authorString, bibtex: result.bibtex, pdfurl: pdfurl}})
             })
             .close();
-        });
-    })
+    });
+});
 
 app.get('/paperpdf/:word', (req, res) => {
     const doc = new PDFDocument();
@@ -265,15 +272,33 @@ app.get('/papertxt/:word', (req, res) => {
     });
 });
 
-app.get('/pdf', (req,res) => {
-    const doc = new PDFDocument();
-    res.setHeader('Content-disposition', 'attachment; filename="abstract.pdf"');
-    res.setHeader('Content-type', 'application/pdf');
-    const abstract = req.body.abstract;
-    doc.y = 300
-    doc.text(abstract, 50, 50)
-    doc.pipe(res)
-    doc.end()
+app.get('/pdf/:word/:url', (req,res) => {
+    var word = req.params.word;
+    var url = decodeURIComponent(req.params.url);
+    var pdfurl = 'http://dl.acm.org/' + url;
+    var stream = text(pdfurl);
+    var string = '';
+    stream.on('data', (part) => {
+        var asdf = part.toString('utf-8');
+        string += asdf;
+    })
+    stream.on('end',() => {
+        var wordArray = string.split(" ");
+        const doc = new PDFDocument();
+        res.setHeader('Content-disposition', 'attachment; filename="paper.pdf"');
+        res.setHeader('Content-type', 'application/pdf');
+        doc.y = 300
+
+        for (var i = 0; i < wordArray.length; i++) {
+            if (wordArray[i].toLowerCase() == word.toLowerCase()) {
+                doc.fillColor('red');
+            }
+            doc.text(wordArray[i] + " ", {continued: true})
+            doc.fillColor('black')
+        }
+        doc.pipe(res)
+        doc.end()
+    });
 });
 
 function sanitize(val) {

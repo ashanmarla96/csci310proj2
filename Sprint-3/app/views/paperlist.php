@@ -18,7 +18,7 @@
           $pdfArray = explode(",", $_GET['pdfs']);
           for ($x = 0; $x<count($paperArray); $x++) {
           ?>
-            <li> <a href="<?php echo "/abstractpage/".$_GET['word']."/".$_GET['keyword']."/".urlencode($urlArray[$x]); ?>"> <?php echo $paperArray[$x]?> </a> <br> <button onclick="window.location.href='http://dl.acm.org/<?php echo $pdfArray[$x] ?>'"> PDF </button> <button> BibTex </button>  </li>  
+            <input type="checkbox" id="checkbox<?php echo $x ?>"<li> <a href="<?php echo "/abstractpage/".$_GET['word']."/".$_GET['keyword']."/".urlencode($urlArray[$x]); ?>"> <?php echo $paperArray[$x]?> </a> <br> <button onclick="window.location.href='http://dl.acm.org/<?php echo $pdfArray[$x] ?>'"> PDF </button> </li>  
           <?php  
           }
           ?>

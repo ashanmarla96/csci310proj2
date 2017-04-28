@@ -22,10 +22,17 @@
       <div class="cloudSearchArea">
         <input type="search" id="searchBar2" placeholder="Search Keyword or Author">
         <button id="searchButton2" onclick="window.location.href='/wordcloud/'+document.getElementById('searchBar2').value">Search</button>
+        <button id="saveImage" onclick=save()>Save</button>
       </div>
 
     </div>
 
+  <script>
+    function save() {
+      var canvas = document.getElementById("canvas");
+      document.write("<img src='"+canvas.toDataURL("image/png")+"' alt='from canvas'/>");
+    }
+  </script>
 </body>
 
 

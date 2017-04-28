@@ -16,7 +16,7 @@ div, p {
     width: 800px;
 }
 
-#backtoList, #backtoCloud, #pdf{
+#backtoList, #backtoCloud, #pdf, #bibtex{
   margin-left: 0px;
   background-color: purple;
   color: white;
