@@ -13,16 +13,23 @@ Scenario: Word Cloud Page UI
 	Given I am on the word cloud page
 	And I should see the word cloud
 	And the word cloud title should be the same as html title
+	And I should see the searchBar2
+	And I should see the searchButton2
+
+	
 
 Scenario: Paper List Page UI
 	Given I am on the page list page
-	Then PDF should be in the html
+	Then keyword should be in the html
+	Then word should be in the html
 	And I should see the word as title
 	And I should see the paper list
 	And the page list title should be the same as html title
-	And I should see the down load link
-	And I should see the generate new cloud button
-	And I should see the radio button
+	And I should see the PDF button
+	And I should see the BibTex button
+	And I should see the pdfButton button
+	And I should see the Text button
+	And I should see the backtoCloud button
 
 Scenario: Abstract Page UI
 	Given I am on the abstract page

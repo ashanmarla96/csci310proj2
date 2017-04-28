@@ -8,9 +8,7 @@ Scenario: Page List and Title
 	Then I should see the paper list
 	And the chosen word should be shown on the page
 
-Scenario: Paper Name, parenthesis and fequency
-	Given I am on the paper list page
-	Then the entries on the list should have name, parenthesis and frequency
+
 
 Scenario: Navigating to paper Page
 	Given I am on the paper list page

@@ -1,12 +1,5 @@
 Then /the chosen word should be shown on the page/ do
-	expect(page).to have_content("word")
-end
-
-Then /the entries on the list should have name, parenthesis and frequency/ do
-	expect(page).to have_content("(")
-	expect(page).to have_content(")")
-	expect(page).to have_content("1")
-	expect(page).to have_content("Boyfriend")
+	expect(page).to have_content("the")
 end
 
 When /I select radio buttons/ do
@@ -14,7 +7,7 @@ When /I select radio buttons/ do
 end
 
 When /I click a paper title / do
-	page.click_link("paper title")
+	page.click_link("I'm Walking")
 end
 
 
